@@ -11,6 +11,9 @@
         
         <!-- Adding icon to the project tab -->
         <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQyc3OptmZokwLYEzsEONuDXod6dnjYs1WrM6anlMz8eTyQbCaI&usqp=CAU" type="image/gif" sizes="16x16">
+        
+        <!-- JQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
         <title>WP Web Scrapping</title>
     </head>
@@ -36,18 +39,28 @@
                 </div>
                 <div class="form-group">
                     <label for="inputPerPageCount">Per Page Count</label>
-                    <input type="password" class="form-control" id="inputPerPageCount" placeholder="Ex. 10" required>
+                    <input type="text" class="form-control" id="inputPerPageCount" placeholder="Ex. 10" required>
                     <small id="perPageHelp" class="form-text text-muted">This is required, which contemplates how much Post should be coming per page</small>
                   </div>
                 <div class="form-group">
                   <label for="inputTotalPages">Total Number of Post Pages</label>
-                  <input type="password" class="form-control" id="inputTotalPages" placeholder="Ex. 80" required>
+                  <input type="text" class="form-control" id="inputTotalPages" placeholder="Ex. 80" required>
                   <small id="totalPagesHelp" class="form-text text-muted">Total number of Post Pages you have in your blog, for more info you can checkout your pagination, and simply put the last page number</small>
                 </div>
                 <center>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-primary" onclick="onSubmit()">Download File</button>
                 </center>
             </form>
         </div>
     </body>
+
+    <script type="text/javascript">
+        function onSubmit(){
+            domain = document.getElementById('inputDomainURL').value;
+            per_page = document.getElementById('inputPerPageCount').value;
+            total_pages = document.getElementById('inputTotalPages').value;
+
+            
+        }
+    </script>
 </html>
