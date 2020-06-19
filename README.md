@@ -1,7 +1,7 @@
 # wp-blog-scrapping
 
 [![dependency](https://img.shields.io/github/pipenv/locked/dependency-version/metabolize/rq-dashboard-on-heroku/flask)](https://img.shields.io/github/pipenv/locked/dependency-version/metabolize/rq-dashboard-on-heroku/flask)
-[![license-mit](https://img.shields.io/github/license/aloklearning/python-rest-api-app)](https://img.shields.io/github/license/aloklearning/python-rest-api-app)
+[![license-mit](https://img.shields.io/github/license/aloklearning/wp-blog-scrapping)](https://img.shields.io/github/license/aloklearning/wp-blog-scrapping)
 [![githubbuild](https://img.shields.io/appveyor/build/gruntjs/grunt)](https://img.shields.io/appveyor/build/gruntjs/grunt)
 [![pyversion](https://img.shields.io/pypi/pyversions/django)](https://img.shields.io/pypi/pyversions/django)
 
