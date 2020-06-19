@@ -35,17 +35,17 @@
             <form>
                 <div class="form-group">
                   <label for="inputDomainURL">Wordpress Domain URL</label>
-                  <input type="text" class="form-control" id="inputDomainURL" aria-describedby="domainHelp" placeholder="Ex. thewordpresspage.com without https://" required>
+                  <input type="text" class="form-control" id="inputDomainURL" aria-describedby="domainHelp" placeholder="Ex. thewordpresspage.com without https://">
                   <small id="domainHelp" class="form-text text-muted">This will checkout the Wordpress domain, and fetches your blog post data</small>
                 </div>
                 <div class="form-group">
                     <label for="inputPerPageCount">Per Page Count</label>
-                    <input type="text" class="form-control" id="inputPerPageCount" placeholder="Ex. 10" required>
+                    <input type="text" class="form-control" id="inputPerPageCount" placeholder="Ex. 10">
                     <small id="perPageHelp" class="form-text text-muted">This is required, which contemplates how much Post should be coming per page</small>
                   </div>
                 <div class="form-group">
                   <label for="inputTotalPages">Total Number of Post Pages</label>
-                  <input type="text" class="form-control" id="inputTotalPages" placeholder="Ex. 80" required>
+                  <input type="text" class="form-control" id="inputTotalPages" placeholder="Ex. 80">
                   <small id="totalPagesHelp" class="form-text text-muted">Total number of Post Pages you have in your blog, for more info you can checkout your pagination, and simply put the last page number</small>
                 </div>
                 <center>
@@ -58,24 +58,33 @@
 
     <script type="text/javascript">
         function onSubmit(){
-            $('#message').html('In Progress. Please wait till...');
-            var data = {
-                domain: document.getElementById('inputDomainURL').value,
-                per_page_count: document.getElementById('inputPerPageCount').value,
-                total_pages: document.getElementById('inputTotalPages').value
-            }
-
-            $.ajax({
-                url: 'http://127.0.0.1:4000/blog-scrap',
-                type: 'post',
-                dataType: 'json',
-                contentType: 'application/json',
-                data: JSON.stringify(data),
-                success: function (data) {
-                    $('#message').html('');
-                    alert(data.message);
+            domain = document.getElementById('inputDomainURL').value,
+            per_page_count =  document.getElementById('inputPerPageCount').value,
+            total_pages = document.getElementById('inputTotalPages').value
+            
+            
+            if(domain != '' && per_page_count != '' && total_pages != ''){
+                $('#message').html('In Progress. Please wait till...');
+                var data = {
+                    domain: domain,
+                    per_page_count: per_page_count,
+                    total_pages: total_pages
                 }
-        });
+
+                $.ajax({
+                    url: 'http://127.0.0.1:4000/blog-scrap',
+                    type: 'post',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    data: JSON.stringify(data),
+                    success: function (data) {
+                        $('#message').html('');
+                        alert(data.message);
+                    }
+                });
+            }else{
+                $('#message').html('All fields are compulsary')
+            }
 
         }
     </script>
