@@ -56,11 +56,24 @@
 
     <script type="text/javascript">
         function onSubmit(){
-            domain = document.getElementById('inputDomainURL').value;
-            per_page = document.getElementById('inputPerPageCount').value;
-            total_pages = document.getElementById('inputTotalPages').value;
+            var data = {
+                domain: document.getElementById('inputDomainURL').value,
+                per_page_count: document.getElementById('inputPerPageCount').value,
+                total_pages: document.getElementById('inputTotalPages').value
+            }
 
-            
+            $.ajax({
+                url: 'http://127.0.0.1:4000/blog-scrap',
+                type: 'post',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify(data),
+                success: function (data) {
+                    // $('#target').html(data.msg);
+                    alert(data.message);
+                }
+        });
+
         }
     </script>
 </html>

@@ -4,21 +4,20 @@ to write the data into the excel sheet, however, there is
 and advanced module that is XLXSWRITER which lets us write the 
 URL, String in a more professional manner
 '''
-import os
-import json
-import urllib
-import requests
-import xlsxwriter
-from flask import Flask, request
+import os, io
+import json, requests, xlsxwriter
+from flask_cors import CORS
+from flask import Flask, request, send_file
 
 # Creating flask app
 app = Flask(__name__)
 app.secret_key = 'alok'
+CORS(app) # allowing the cross-origin request to come
 
 # for fetching the data per page wise from wordpress
 def get_blog_data(domain, per_page, page):
-    api_url = 'http://{}/wp-json/wp/v2/posts?_embed&per_page={}&page={}'.format(domain, per_page, page) 
-    response = requests.get(api_url)
+    api_url = 'https://{}/wp-json/wp/v2/posts?_embed&per_page={}&page={}'.format(domain, per_page, page) 
+    response = requests.get(api_url, headers={"User-Agent": "XY"}) # using user agent probably saves us from getting 406
 
     if response.status_code == 200:
         json_data = json.loads(response.content.decode('utf-8'))
@@ -30,7 +29,9 @@ def get_blog_data(domain, per_page, page):
 # Initializing Workbook for excel
 def workbook(domain, per_page_count, total_pages):
     # workbook is created
-    workbook = xlsxwriter.Workbook('blog_final_data.xlsx')
+    # Getting desktop path for cross-platform
+    desktop_file = os.path.expanduser("~/Desktop/blog_final_data.xlsx")
+    workbook = xlsxwriter.Workbook(desktop_file)
     worksheet = workbook.add_worksheet('WP Blogs Data')
 
     # add_sheet is used to create
@@ -53,7 +54,7 @@ def workbook(domain, per_page_count, total_pages):
 
     arr_final_data = []
 
-    for i in range(1, total_pages+1):
+    for i in range(1, int(total_pages)+1):
         new_arr = get_blog_data(domain, per_page_count, i) # we get the arr here, now we will add the dict
         if new_arr == "Failure":
             return "Failed"
@@ -76,18 +77,6 @@ def workbook(domain, per_page_count, total_pages):
     #wb.save('xlwt blog_final_data.xls')
     workbook.close()
 
-    # after successful operation download the file
-    download_file()
-
-def download_file():
-    url = "http://127.0.0.1:4000/Users/alok/MyProjects/BlogFetchExcel/"
-    urllib.request.urlretrieve(url, "blog_final_data.xlsx")
-
-    # deleting the file which got saved in our file
-    os.remove("blog_final_data.xlsx")
-    print("File Removed!")
-
-
 @app.route('/blog-scrap', methods=['POST'])
 def web_scrapping():
     # Getting data from the requests
@@ -98,7 +87,10 @@ def web_scrapping():
     if response == "Failed":
         return {"message": "No wordpress domain found with the provided domain data"}
     else:
-        return {"message": "Successfull Operation"}
+        # deleting the file which got saved in our file
+        # os.remove("blog_final_data.xlsx")
+        # print("File Removed!")
+        return {"message": "Your file has been saved successfully on your Desktop!!!"}
     
 
 if __name__ == "__main__":
