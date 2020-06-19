@@ -31,4 +31,4 @@
 - Python Docs => [Python](https://docs.python.org/3/)
 - Wordpress API Docs => [WP API Handbook](https://developer.wordpress.org/rest-api/)
 - Web Scrapping Definition => [Web Scrapping](https://www.scrapinghub.com/what-is-web-scraping)
-- XLSX Python Docs => [Python xlsx Module](https://xlsxwriter.readthedocs.io/)
+- XLSX Python Docs => [Python xlsxwriter Module](https://xlsxwriter.readthedocs.io/)
