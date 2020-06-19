@@ -27,4 +27,7 @@
 
 ## Links
 
-- Python Flask [Flask](https://flask.palletsprojects.com/en/1.1.x/tutorial/)
+- Python Flask => [Flask](https://flask.palletsprojects.com/en/1.1.x/tutorial/)
+- Python Docs => [Python](https://docs.python.org/3/)
+- Wordpress API Docs => [WP API Handbook](https://developer.wordpress.org/rest-api/)
+- Web Scrapping Definition => [Web Scrapping](https://www.webharvy.com/articles/what-is-web-scraping.html#:~:text=Web%20Scraping%20(also%20termed%20Screen,in%20table%20(spreadsheet)%20format.)
